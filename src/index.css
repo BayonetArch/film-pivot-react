@@ -191,21 +191,6 @@ input::placeholder {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 0.01ms;
-  }
-
-  .result > * {
-    animation: none !important;
-  }
-
-  .result-error {
-    transition-duration: 0.01ms;
-  }
-}
-
 /* staggered card entrance */
 .result > * {
   animation: fp-card-in 380ms ease-out both;
