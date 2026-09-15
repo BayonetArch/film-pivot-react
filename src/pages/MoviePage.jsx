@@ -29,7 +29,8 @@ function MoviePage() {
 
   return (
     <div className={styles["movie-page"]}>
-      <h1>Movie Details: {id}</h1>
+      <h1>Movie ID: {id}</h1>
+      <h1> To be Done </h1>
     </div>
   )
 }
