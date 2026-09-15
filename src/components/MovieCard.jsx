@@ -12,7 +12,7 @@ function MovieCard({ movie }) {
       className={styles["movie-card"]}
       onClick={() => {
         setSearchQuery("")
-        navigate(`/movie/${imdbID}`)
+        navigate(`/movie/${imdbID}`, { viewTransition: true })
       }}>
       <img
         className={styles["movie-poster"]}

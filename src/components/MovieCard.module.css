@@ -37,7 +37,7 @@
 .movie-type {
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--accent);
+  color: var(--border);
   font-weight: 400;
 }
 

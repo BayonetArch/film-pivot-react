@@ -8,7 +8,9 @@
   --text-secondary: hsl(0, 0%, 55%);
   --border: hsl(210, 13%, 50%);
   --accent: hsl(120, 14%, 54%);
+  --accent-subtle: hsl(120, 14%, 40%);
   --equal-width: 40%;
+  --error-bg: hsla(0, 100%, 42%, 0.2);
 
   @media (max-width: 768px) {
     --equal-width: 50%;
@@ -22,6 +24,7 @@ body {
   flex-direction: column;
   background-color: var(--bg-primary);
   font-family: "Inter", system-ui, -apple-system, sans-serif;
+  position: relative;
 }
 
 input {
@@ -58,6 +61,7 @@ input::placeholder {
 }
 
 .result-wrapper {
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,6 +93,7 @@ input::placeholder {
   -webkit-mask-composite: source-out;
   mask-composite: subtract;
   animation: l3 1s infinite linear;
+  position: absolute;
 }
 @keyframes l3 {
   to {
@@ -96,6 +101,151 @@ input::placeholder {
   }
 }
 /* loader animation end */
+
+.loader-wrapper {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-error {
+  color: var(--text-primary);
+  border: 1px solid hsl(332, 22%, 28%);
+  border-left: 4px solid hsl(352, 38%, 54%);
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  max-width: 360px;
+  box-shadow: 0 4px 24px hsla(0, 0%, 0%, 0.5);
+  transform: translateX(calc(100% + 24px));
+  opacity: 0;
+  transition:
+    transform 320ms ease-out,
+    opacity 320ms ease-out;
+}
+
+.result-error.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.result-error p {
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.error-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  padding: 2px;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s ease-in;
+}
+
+.error-close svg {
+  color: var(--accent);
+  width: 1rem;
+  height: 1rem;
+}
+
+.error-close:hover {
+  opacity: 0.7;
+}
+
+/* view transition */
+::view-transition-old(root) {
+  animation: fp-page-out 220ms ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: fp-page-in 320ms ease-out both;
+}
+
+@keyframes fp-page-out {
+  to {
+    opacity: 0;
+    transform: scale(0.98) translateY(-6px);
+  }
+}
+
+@keyframes fp-page-in {
+  from {
+    opacity: 0;
+    transform: scale(1.01) translateY(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms;
+  }
+
+  .result > * {
+    animation: none !important;
+  }
+
+  .result-error {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* staggered card entrance */
+.result > * {
+  animation: fp-card-in 380ms ease-out both;
+}
+
+.result > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.result > *:nth-child(2) {
+  animation-delay: 50ms;
+}
+.result > *:nth-child(3) {
+  animation-delay: 100ms;
+}
+.result > *:nth-child(4) {
+  animation-delay: 150ms;
+}
+.result > *:nth-child(5) {
+  animation-delay: 200ms;
+}
+.result > *:nth-child(6) {
+  animation-delay: 250ms;
+}
+.result > *:nth-child(7) {
+  animation-delay: 300ms;
+}
+.result > *:nth-child(8) {
+  animation-delay: 350ms;
+}
+.result > *:nth-child(9) {
+  animation-delay: 400ms;
+}
+.result > *:nth-child(n + 10) {
+  animation-delay: 450ms;
+}
+
+@keyframes fp-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
 
 @media (max-width: 768px) {
   input {
