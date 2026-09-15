@@ -6,6 +6,7 @@
 
 * {
   margin: 0;
+  -webkit-tap-highlight-color: hsla(120, 14%, 40%, 0.12);
 }
 
 body {

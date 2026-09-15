@@ -32,3 +32,12 @@
     letter-spacing: 0.02em;
   }
 }
+
+@media (hover: none) {
+  .quicklink:hover {
+    scale: 1;
+  }
+  .quicklink:active {
+    scale: 0.98;
+  }
+}

@@ -60,3 +60,12 @@
     font-size: 1rem;
   }
 }
+
+@media (hover: none) {
+  .movie-card:hover {
+    scale: 1;
+  }
+  .movie-card:active {
+    scale: 0.98;
+  }
+}
