@@ -1,11 +1,17 @@
 import { useOutletContext } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import styles from "./MovieCard.module.css"
+import noPoster from "../assets/no-poster.svg"
 
 function MovieCard({ movie }) {
   const imdbID = movie.imdbID
   const navigate = useNavigate()
   const [_searchQuery, setSearchQuery] = useOutletContext()
+
+  const poster =
+    movie.Poster === "N/A" || movie.Poster.length === 0
+      ? noPoster
+      : movie.Poster
 
   return (
     <div
@@ -16,8 +22,9 @@ function MovieCard({ movie }) {
       }}>
       <img
         className={styles["movie-poster"]}
-        src={movie.Poster}
+        src={poster}
         alt={movie.Title}
+        onError={(e) => (e.target.src = noPoster)}
       />
       <div className={styles["movie-info"]}>
         <h3 className={styles["movie-title"]}>{movie.Title}</h3>

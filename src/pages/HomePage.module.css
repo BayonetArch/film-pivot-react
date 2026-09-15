@@ -1,0 +1,34 @@
+.quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.quicklinks-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.quicklink {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease-in-out;
+}
+
+.quicklink:hover {
+  box-shadow: 0 0 4px var(--border);
+  scale: 1.03;
+}
+
+@media (max-width: 768px) {
+  .quicklink {
+    font-size: 0.7rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+}
