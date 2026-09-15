@@ -1,5 +1,75 @@
 .movie-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   color: var(--text-primary);
+  width: var(--equal-width);
+  padding: 0.4rem;
+  position: relative;
+}
+
+.movie-page-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.movie-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.movie-title {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 550;
+}
+
+.imdb-rating .label {
+  color: var(--text-secondary);
+  letter-spacing: 0.09rem;
+  text-transform: uppercase;
+}
+
+.imdb-rating .number {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.imdb-rating {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: static;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.9rem;
+}
+
+.star {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+.number-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.meta-row {
+  display: flex;
+  gap: 0.6rem;
+  color: var(--text-secondary);
+}
+
+.movie-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .movie-poster {
@@ -8,4 +78,116 @@
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: 0.5rem;
+}
+
+.movie-genre {
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  padding: 0.45rem;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease-in-out;
+}
+
+.movie-genre:hover {
+  background-color: var(--bg-secondary);
+  scale: 1.025;
+}
+
+.movie-plot {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.movie-cast {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.movie-cast {
+  color: var(--border);
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.movie-directors,
+.movie-writers,
+.movie-stars {
+  display: flex;
+  gap: 0.6rem;
+  color: var(--border);
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.movie-director:hover,
+.movie-writer:hover,
+.movie-star:hover {
+  color: var(--text-secondary);
+}
+
+.label {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.movie-awards {
+  margin-top: 2.5rem;
+  border: 1px solid #ccc10e;
+  display: flex;
+  gap: 0.6rem;
+  border-radius: 0.5rem;
+  padding: 0.6rem;
+}
+
+@media (hover: none) {
+  .movie-genre:hover {
+    scale: 1;
+  }
+  .movie-genre:active {
+    scale: 0.98;
+  }
+}
+
+@media (max-width: 800px) {
+  .movie-title {
+    font-size: 1.1rem;
+  }
+  .imdb-rating {
+    font-size: 0.8rem;
+  }
+  .meta-row {
+    font-size: 0.85rem;
+  }
+  .movie-genre {
+    font-size: 0.65rem;
+  }
+  .movie-plot {
+    font-size: 0.96rem;
+  }
+  .movie-directors,
+  .movie-writers,
+  .movie-stars {
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+    word-break: break-word;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .movie-awards {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .imdb-rating {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+  }
 }
