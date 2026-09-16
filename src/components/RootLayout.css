@@ -5,6 +5,31 @@
   gap: 24px;
 }
 
+.app-bg {
+  position: fixed;
+  inset: -2rem;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      55% 40% at 18% 12%,
+      hsla(120, 14%, 54%, 0.14),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 42% at 85% 80%,
+      hsla(210, 13%, 50%, 0.12),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 34% at 70% 8%,
+      hsla(120, 14%, 40%, 0.1),
+      transparent 70%
+    ),
+    linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 65%);
+  filter: blur(60px) saturate(120%);
+}
+
 .site-header {
   display: flex;
   flex-direction: column;

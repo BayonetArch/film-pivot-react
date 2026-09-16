@@ -11,6 +11,7 @@ function RootLayout() {
 
   return (
     <div className="app-container">
+      <div className="app-bg" />
       {isHomePage && (
         <header className="site-header">
           <h1 className="site-title">Film Pivot</h1>
