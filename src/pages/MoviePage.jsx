@@ -41,10 +41,15 @@ function MovieMeta({ title, imdbRating, year, rating, runtime }) {
   )
 }
 
-function MovieGraphics({ poster, title = "unknown film" }) {
+function MovieGraphics({ poster, title = "unknown film", onPosterError }) {
   return (
     <div className={styles["movie-graphics"]}>
-      <img src={poster} alt={title} className={styles["movie-poster"]} />
+      <img
+        src={poster}
+        alt={title}
+        className={styles["movie-poster"]}
+        onError={onPosterError}
+      />
     </div>
   )
 }
@@ -147,7 +152,8 @@ function MoviePage() {
   function handleData(data) {
     const shortData = {
       title: data.Title,
-      poster: data.Poster,
+      poster:
+        data.Poster === "N/A" || data.Poster.length === 0 ? noPoster : data.Poster,
       plot: data.Plot,
       runtime: data.Runtime,
       rating: data.Rated,
@@ -197,6 +203,18 @@ function MoviePage() {
 
   return (
     <div className={styles["movie-page-wrapper"]}>
+      <div
+        className={
+          movieDetails.poster === noPoster
+            ? `${styles["movie-bg"]} ${styles["movie-bg-no-poster"]}`
+            : styles["movie-bg"]
+        }
+        style={
+          movieDetails.poster === noPoster
+            ? undefined
+            : { backgroundImage: `url(${movieDetails.poster})` }
+        }
+      />
       <div className={styles["movie-page"]}>
         <MovieMeta
           title={movieDetails.title}
@@ -208,6 +226,11 @@ function MoviePage() {
         <MovieGraphics
           poster={movieDetails.poster}
           title={movieDetails.title}
+          onPosterError={() =>
+            setMovieDetails((d) =>
+              d.poster === noPoster ? d : { ...d, poster: noPoster },
+            )
+          }
         />
         <MovieGenres genres={movieDetails.genres} />
         <MoviePlot plot={movieDetails.plot} />

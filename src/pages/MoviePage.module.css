@@ -13,6 +13,38 @@
   justify-content: center;
 }
 
+.movie-bg {
+  position: fixed;
+  inset: -2rem;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  filter: blur(48px) saturate(120%);
+  transform: scale(1.15);
+  pointer-events: none;
+}
+
+.movie-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: hsla(0, 0%, 1%, 0.62);
+}
+
+.movie-bg-no-poster {
+  background: radial-gradient(
+      120% 90% at 50% 0%,
+      hsla(215, 25%, 27%, 0.9) 0%,
+      hsla(215, 25%, 18%, 0.55) 50%,
+      hsla(0, 0%, 1%, 0.9) 100%
+    ),
+    linear-gradient(135deg, #1f2937 0%, #374151 45%, #4b5563 100%);
+}
+
+.movie-bg-no-poster::after {
+  background: none;
+}
+
 .movie-meta {
   display: flex;
   flex-direction: column;
@@ -82,14 +114,16 @@
 
 .movie-genre {
   color: var(--text-secondary);
-  background-color: var(--bg-tertiary);
-  padding: 0.45rem;
+  border: 1px solid hsla(120, 14%, 54%, 0.25);
+  padding: 0.45rem 0.7rem;
   border-radius: 0.5rem;
+  background: none;
   transition: all 0.25s ease-in-out;
 }
 
 .movie-genre:hover {
-  background-color: var(--bg-secondary);
+  color: var(--accent);
+  border-color: var(--accent);
   scale: 1.025;
 }
 
