@@ -1,7 +1,9 @@
-.quicklinks {
+.home-page {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
 }
 
 .quicklinks-wrapper {
@@ -9,37 +11,50 @@
   justify-content: center;
 }
 
+.quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
 .quicklink {
   color: var(--text-secondary);
   border: 1px solid hsla(120, 14%, 54%, 0.25);
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
   line-height: 1.5;
   letter-spacing: 0.02em;
-  background: none;
-  transition: all 0.25s ease-in-out;
+  user-select: none;
+  cursor: pointer;
+  transition:
+    color var(--ease),
+    border-color var(--ease),
+    background-color var(--ease),
+    transform var(--ease);
 }
 
 .quicklink:hover {
   color: var(--accent);
   border-color: var(--accent);
-  scale: 1.03;
+  background-color: hsla(120, 14%, 54%, 0.08);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
   .quicklink {
-    font-size: 0.7rem;
-    line-height: 1.5;
-    letter-spacing: 0.02em;
+    font-size: 0.8rem;
   }
 }
 
 @media (hover: none) {
   .quicklink:hover {
-    scale: 1;
+    transform: none;
+    background-color: none;
   }
+
   .quicklink:active {
-    scale: 0.98;
+    transform: scale(0.97);
   }
 }

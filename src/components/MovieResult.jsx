@@ -59,6 +59,18 @@ function MovieResult() {
     return () => clearTimeout(timeoutId)
   }, [searchQuery])
 
+  const hasQuery = searchQuery.trim().length > 2
+  const emptyTitle = wasErr
+    ? "Search failed"
+    : hasQuery
+      ? "No movies found"
+      : "Find something to watch"
+  const emptyHint = wasErr
+    ? "Something went wrong while searching. Please try again."
+    : hasQuery
+      ? `Nothing matched “${searchQuery.trim()}”. Try a different title or genre.`
+      : "Type something, or pick a genre above."
+
   return (
     <div className="result-wrapper">
       <div className={`result-error ${showErr && errMsg ? "show" : ""}`}>
@@ -85,13 +97,19 @@ function MovieResult() {
       </div>
       {loading && searchQuery.length > 2 ? (
         <div className="loader-wrapper">
-          <div className="loader">Loading...</div>
+          <div className="loader" />
+          <span className="loader-label">Searching…</span>
+        </div>
+      ) : data.length > 0 ? (
+        <div className={wasErr ? "result error" : "result"}>
+          {data.map((movie, index) => (
+            <MovieCard key={movie.imdbID} movie={movie} index={index} />
+          ))}
         </div>
       ) : (
-        <div className={wasErr ? "result error" : "result"}>
-          {data.map((movie) => (
-            <MovieCard key={movie.imdbID} movie={movie} />
-          ))}
+        <div className="empty-state">
+          <p>{emptyTitle}</p>
+          <span>{emptyHint}</span>
         </div>
       )}
     </div>

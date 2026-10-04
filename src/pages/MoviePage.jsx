@@ -28,7 +28,7 @@ function MovieMeta({ title, imdbRating, year, rating, runtime }) {
       <div className={styles["imdb-rating"]}>
         <div className={styles["label"]}>IMDB RATING</div>
         <div className={styles["number-wrapper"]}>
-          <img className={styles["star"]} src={star} />
+          <img className={styles["star"]} src={star} alt="" />
           <span className={styles["number"]}>{imdbRating}</span>
         </div>
       </div>
@@ -124,7 +124,8 @@ function MovieCast({ directors, writers, actors }) {
 function MovieAwards({ awards }) {
   return (
     <div className={styles["movie-awards"]}>
-      <span className={styles["label"]}>Awards</span> {awards}
+      <span className={styles["label"]}>Awards</span>
+      <span className={styles["movie-award-text"]}>{awards}</span>
     </div>
   )
 }
@@ -196,7 +197,8 @@ function MoviePage() {
   if (loading) {
     return (
       <div className="loader-wrapper page">
-        <div className="loader">Loading...</div>
+        <div className="loader" />
+        <span className="loader-label">Fetching details…</span>
       </div>
     )
   }
@@ -246,5 +248,3 @@ function MoviePage() {
   )
 }
 export default MoviePage
-
-//TODO: fix the bad animation when changing to movie page from movie page

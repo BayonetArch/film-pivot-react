@@ -1,26 +1,26 @@
-.movie-page {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  color: var(--text-primary);
-  width: var(--equal-width);
-  padding: 0.4rem;
-  position: relative;
-}
-
 .movie-page-wrapper {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
+.movie-page {
+  position: relative;
+  width: var(--content-width);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 0.25rem 0;
+  color: var(--text-primary);
+  animation: fp-card-in 420ms ease-out both;
+}
+
 .movie-bg {
   position: fixed;
-  inset: -2rem;
+  inset: 0;
   z-index: -1;
   background-position: center;
   background-size: cover;
-  filter: blur(48px) saturate(120%);
-  transform: scale(1.15);
   pointer-events: none;
 }
 
@@ -28,11 +28,15 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: hsla(0, 0%, 1%, 0.62);
+  background:
+    linear-gradient(180deg, hsla(0, 0%, 1%, 0.55), hsla(0, 0%, 1%, 0.85)),
+    hsla(0, 0%, 1%, 0.5);
+  backdrop-filter: blur(40px) saturate(130%);
 }
 
 .movie-bg-no-poster {
-  background: radial-gradient(
+  background:
+    radial-gradient(
       120% 90% at 50% 0%,
       hsla(215, 25%, 27%, 0.9) 0%,
       hsla(215, 25%, 18%, 0.55) 50%,
@@ -42,186 +46,278 @@
 }
 
 .movie-bg-no-poster::after {
-  background: none;
+  background: hsla(0, 0%, 1%, 0.6);
+  backdrop-filter: none;
+}
+
+.movie-graphics {
+  order: -1;
+  display: flex;
+  justify-content: center;
+}
+
+.movie-poster {
+  width: 11rem;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px hsla(0, 0%, 0%, 0.6);
 }
 
 .movie-meta {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  align-items: center;
+  gap: 0.7rem;
+  text-align: center;
 }
 
 .movie-title {
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  font-weight: 550;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.imdb-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 999px;
+  background-color: var(--bg-tertiary);
 }
 
 .imdb-rating .label {
   color: var(--text-secondary);
-  letter-spacing: 0.09rem;
-  text-transform: uppercase;
-}
-
-.imdb-rating .number {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.imdb-rating {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: static;
-  top: 1rem;
-  right: 1rem;
-  font-size: 0.9rem;
-}
-
-.star {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
+  font-size: 0.7rem;
 }
 
 .number-wrapper {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.3rem;
+}
+
+.imdb-rating .number {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.star {
+  width: 0.95rem;
+  height: 0.95rem;
 }
 
 .meta-row {
   display: flex;
-  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem 0.75rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
+}
+
+.meta-row > * + *::before {
+  content: "·";
+  margin-right: 0.75rem;
+  color: var(--border);
 }
 
 .movie-genres {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-
-.movie-poster {
-  border-radius: 10px;
-  width: 12rem;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  border-radius: 0.5rem;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .movie-genre {
   color: var(--text-secondary);
   border: 1px solid hsla(120, 14%, 54%, 0.25);
-  padding: 0.45rem 0.7rem;
-  border-radius: 0.5rem;
-  background: none;
-  transition: all 0.25s ease-in-out;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  user-select: none;
+  cursor: pointer;
+  transition:
+    color var(--ease),
+    border-color var(--ease),
+    transform var(--ease);
 }
 
 .movie-genre:hover {
   color: var(--accent);
   border-color: var(--accent);
-  scale: 1.025;
+  transform: translateY(-2px);
 }
 
 .movie-plot {
-  font-size: 1.2rem;
-  color: var(--text-primary);
-  line-height: 1.5;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 
 .movie-cast {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.6rem;
-}
-
-.movie-cast {
-  color: var(--border);
-  cursor: pointer;
-  transition: all 0.25s ease-in-out;
+  gap: 0.85rem;
 }
 
 .movie-directors,
 .movie-writers,
-.movie-stars {
-  display: flex;
-  gap: 0.6rem;
-  color: var(--border);
+.movie-stars,
+.movie-awards {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.35rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.label {
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.movie-director,
+.movie-writer,
+.movie-star,
+.movie-award-text {
+  grid-column: 2;
+}
+
+.movie-director,
+.movie-writer,
+.movie-star {
+  color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.25s ease-in-out;
+  transition: color var(--ease);
 }
 
 .movie-director:hover,
 .movie-writer:hover,
 .movie-star:hover {
-  color: var(--text-secondary);
-}
-
-.label {
   color: var(--accent);
-  font-weight: 600;
 }
 
 .movie-awards {
-  margin-top: 2.5rem;
-  border: 1px solid #ccc10e;
-  display: flex;
-  gap: 0.6rem;
-  border-radius: 0.5rem;
-  padding: 0.6rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid hsla(54, 92%, 46%, 0.4);
+  border-radius: var(--radius-md);
+  background-color: hsla(54, 92%, 46%, 0.07);
+  color: var(--text-secondary);
 }
 
-@media (hover: none) {
-  .movie-genre:hover {
-    scale: 1;
+@media (min-width: 900px) {
+  .movie-page {
+    width: min(64rem, 94%);
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    grid-template-areas:
+      "poster meta"
+      "poster genres"
+      "poster plot"
+      "poster cast"
+      "awards awards";
+    align-content: start;
+    gap: 1.75rem 2.5rem;
+    padding: 2.5rem 0 0;
   }
-  .movie-genre:active {
-    scale: 0.98;
+
+  .movie-graphics {
+    order: 0;
+    grid-area: poster;
+    align-self: start;
+  }
+
+  .movie-poster {
+    width: 100%;
+  }
+
+  .movie-meta {
+    grid-area: meta;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .meta-row {
+    justify-content: flex-start;
+  }
+
+  .movie-genres {
+    grid-area: genres;
+    justify-content: flex-start;
+  }
+
+  .movie-plot {
+    grid-area: plot;
+    text-align: left;
+  }
+
+  .movie-page > .divider {
+    display: none;
+  }
+
+  .movie-cast {
+    grid-area: cast;
+  }
+
+  .movie-awards {
+    grid-area: awards;
   }
 }
 
 @media (max-width: 800px) {
-  .movie-title {
-    font-size: 1.1rem;
-  }
-  .imdb-rating {
-    font-size: 0.8rem;
-  }
-  .meta-row {
-    font-size: 0.85rem;
-  }
   .movie-genre {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
+
   .movie-plot {
-    font-size: 0.96rem;
+    font-size: 0.95rem;
   }
+
   .movie-directors,
   .movie-writers,
-  .movie-stars {
-    font-size: 0.85rem;
-    flex-wrap: wrap;
-    word-break: break-word;
-    flex-direction: column;
-    gap: 0.3rem;
+  .movie-stars,
+  .movie-awards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+
+  .movie-director,
+  .movie-writer,
+  .movie-star,
+  .movie-award-text {
+    grid-column: 1;
   }
 
   .movie-awards {
-    flex-direction: column;
-    gap: 0.3rem;
+    align-items: start;
   }
 }
 
-@media screen and (min-width: 1920px) {
-  .imdb-rating {
-    position: absolute;
-    top: 6rem;
-    right: 1rem;
-    font-size: 1rem;
+@media (hover: none) {
+  .movie-genre:hover,
+  .movie-director:hover,
+  .movie-writer:hover,
+  .movie-star:hover {
+    color: inherit;
+  }
+
+  .movie-genre:active {
+    transform: scale(0.97);
   }
 }

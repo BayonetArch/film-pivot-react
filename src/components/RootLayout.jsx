@@ -36,7 +36,7 @@ function RootLayout() {
           <input
             className="movie-search-input"
             type="text"
-            placeholder="Search for movies...."
+            placeholder="Search for movies…"
             value={searchQuery}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
@@ -50,14 +50,13 @@ function RootLayout() {
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
-            strokeLinejoin="round"
-            onClick={() => {}}>
+            strokeLinejoin="round">
             <circle cx="10.5" cy="10.5" r="7.5"></circle>
             <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
           </svg>
         </div>
       </div>
-      <main>
+      <main className="app-main">
         <Outlet context={[searchQuery, setSearchQuery]} />
       </main>
     </div>
